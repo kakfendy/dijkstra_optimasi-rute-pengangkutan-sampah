@@ -106,14 +106,15 @@ public class Main {
         int totalDistance = 0;
         int currentCity = disposalSite;
 
-        System.out.println("Urutan jalan truk dalam mengangkut sampah:");
+        System.out.println("\n==========================================" + 
+                             "\nUrutan jalan truk dalam mengangkut sampah:");
 
         while (garbageAmounts.values().stream().anyMatch(amount -> amount > 0)) {
             int nextCity = findNextCity(garbageAmounts, distance, maxTruckCapacity, currentCity);
 
             // Kembali ke tempat pembuangan sampah setelah kapasitas truk terpenuhi atau semua kota sudah bersih
             if (nextCity == -1 || garbageAmounts.values().stream().allMatch(amount -> amount == 0)) {
-                System.out.println("Truk kembali ke tempat pembuangan sampah untuk mengosongkan sampah");
+                System.out.println("\nTruk kembali ke tempat pembuangan sampah untuk mengosongkan sampah");
                 currentTruckCapacity = 0; // Reset kapasitas truk
                 nextCity = disposalSite; // Kembali ke tempat pembuangan sampah
 
@@ -127,7 +128,7 @@ public class Main {
                         truckRoute.add(i);
                         totalDistance += distance.get(currentCity);
 
-                        System.out.println("Truk mengunjungi kota " + i + " dan mengangkut sampah sebanyak " + garbageCollected);
+                        System.out.println("\nTruk mengunjungi kota " + i + "\nTruk mengangkut sampah sebanyak " + garbageCollected);
                         System.out.println("Jumlah sampah di kota " + i + " sekarang: " + garbageAmounts.get(i));
 
                         // Pindah ke kota berikutnya
@@ -135,7 +136,7 @@ public class Main {
                     }
                 }
             } else {
-                System.out.println("Truk mengunjungi kota " + nextCity);
+                System.out.println("\nTruk mengunjungi kota " + nextCity);
 
                 // Menghitung sampah yang diangkut oleh truk
                 int garbageCollected = Math.min(maxTruckCapacity - currentTruckCapacity, garbageAmounts.get(nextCity));
@@ -154,7 +155,7 @@ public class Main {
             }
         }
 
-        System.out.println("Total jarak: " + totalDistance);
+        System.out.println("\nTotal jarak: " + totalDistance);
         System.out.println("Urutan kota yang dilalui: " + truckRoute);
     }
 
